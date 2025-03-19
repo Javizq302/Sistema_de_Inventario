@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Sistema de Inventario</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1>Inventario de Productos</h1>
+        <div id="mensaje"></div>
+        <form id="product-form">
+            <input type="text" id="name" placeholder="Nombre del Producto" required>
+            <input type="number" id="quantity" placeholder="Cantidad" min="1" required>
+            <input type="number" id="price" placeholder="Precio" min="1" required>
+            <!-- <input type="text" id="category" placeholder="Categoría" required> -->
+            <select id="category">
+                <option value="Comida">Comida</option>
+                <option value="Productos de Limpieza">Productos de Limpieza</option>
+                <option value="Ropa">Ropa</option>
+                <option value="Bebidas">Bebidas</option>
+                <option value="Ferreteria">Ferreteria</option>
+            </select>
+            <button type="submit">Agregar Producto</button>
+        </form>
+
+        <input type="text" id="search" placeholder="Buscar producto...">
+
+
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Categoría</th>
+                <th>Acciones</th>
+            </thead>
+            <tbody id="product-list">
+                <!-- Aqui se muestran los Productos-->
+            </tbody>
+        </table>
+
+
+        <!-- Crea el Modal Para Eliminar Un Producto-->
+         <div id="delete-modal" class="modal">
+            <div class="modal-content">
+                <!--Boton para cerrar modal-->
+                <span class="close">&times;</span>
+                <h2>Eliminar Producto</h2>
+                <p>Ingrese la cantidad a eliminar:</p>
+                <input type="number" id="delete-quantity" min="1">
+                <button id="confirm-delete">Confirmar</button>
+            </div>
+         </div>
+
+        <script src="script.js"></script>
+
+    </body>
+</html>
