@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.innerHTML = `
                     <td>${product.name}</td>
                     <td>${product.quantity}</td>
-                    <td>${product.price}</td>
+                    <td>$ ${product.price}</td>
                     <td>${product.category}</td>
                     <td><button class="delete-btn">Eliminar</button></td>
                 `;

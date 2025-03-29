@@ -1,6 +1,7 @@
 
 import pyodbc
 from flask import Flask, request, jsonify
+import re
 from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
@@ -19,14 +20,26 @@ def get_db_connection():
 #Hacer un Merge para que no se dupiquen los items.
 @app.route('/api/products', methods=['GET'])
 def get_products():
+
+    precio = request.args.get('precio')
+    params = ()
+    if precio:
+        # La expresión regular permite enteros o decimales con 1 o 2 dígitos después del punto.
+        if not re.match(r'^\d+(\.\d{1,2})?$', precio):
+            return jsonify({'error': 'El formato del precio debe tener hasta dos decimales.'}), 400
+        # Convertimos el valor a float para usarlo en la consulta
+        precio_float = float(precio)
+        query = "SELECT Id, [Name], Quantity, Price, Category FROM Products WHERE Price = ?"
+        params = (precio_float,)
+    else:
+        query = "SELECT Id, [Name], Quantity, Price, Category FROM Products"
+    
+
     conn = get_db_connection()
     cursor = conn.cursor()
     cursor.execute("SELECT Id, [Name], Quantity, Price, Category FROM Products")
     products = []
     
-    #añadiendo un IF donde si el name, la cantidad y la Categoria es la misma este se sume en vs de hacer un nuevo objeto.
-
-    #si el if identificar que las constante no son la misma == este va a pasar a un else donde estara ese for. 
     for row in cursor.fetchall():
         products.append({
             'id': row[0],
