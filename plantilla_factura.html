@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        td, th { border: 1px solid #ccc; padding: 8px; text-align: left; }
+    </style>
+</head>
+<body>
+    <h1>Factura</h1>
+    <p>Cliente: {{ datos.cliente }}</p>
+    <table>
+        <tr>
+            <th>Producto</th><th>Cantidad</th><th>Precio</th><th>Subtotal</th>
+        </tr>
+        {% for p in datos.productos %}
+        <tr>
+            <td>{{ p.nombre }}</td>
+            <td>{{ p.cantidad }}</td>
+            <td>${{ p.precio }}</td>
+            <td>${{ p.cantidad * p.precio }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h3>Total: ${{ datos.total }}</h3>
+</body>
+</html>
